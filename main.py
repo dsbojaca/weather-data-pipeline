@@ -9,10 +9,13 @@ def leer_ciudades(path="./env_clima/app/cities.txt"):
     
 def run_pipeline(cities):
     for city in cities:
-        print(f"obteniendo datos de {city}...")
-        raw= parse_weather_data(city)
-        parsed= parse_weather(raw)
-        save_to_db(parsed)
+        try:
+            print(f"obteniendo datos de {city}...")
+            raw= parse_weather_data(city)
+            parsed= parse_weather(raw)
+            save_to_db(parsed)     
+        except Exception as e:
+            print(f"Error en el Pipeline: {e}")
 
 
 if __name__== "__main__":
