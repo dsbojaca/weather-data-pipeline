@@ -89,5 +89,64 @@ docker run --name weather-postgres \
 - `-e POSTGRES_DB=weatherdb`: crea automáticamente una base de datos con ese nombre.
 - `-p 5432:5432`: expone el puerto de PostgreSQL para que puedas conectarte desde tu aplicación local.
 - `-d postgres`: usa la última versión oficial de la imagen `postgres`.
+---
+
+
+# 🐛 Problemas comunes con entornos virtuales e instalaciones
+
+Durante el desarrollo del proyecto, se presentaron algunos errores frecuentes relacionados con la instalación de dependencias, entornos virtuales y conexión con servicios. A continuación, se listan los más relevantes y sus soluciones.
+
+---
+
+## 1. `This environment is externally managed` al usar pip
+
+Este error ocurre cuando se intenta instalar paquetes en una instalación de Python administrada por el sistema operativo, como suele pasar en distribuciones Linux.
+
+
+#### ✅ Solución
+
+Crear y activar un entorno virtual antes de instalar paquetes:
+
+```bash
+python3 -m venv env_clima
+source env_clima/bin/activate
+```
+Despues ejecutar
+
+```bash
+pip install -r requirements.txt
+```
+
+## 2. `ModuleNotFoundError`: No module named 'streamlit' (u otro paquete)
+
+Este error indica que estás tratando de usar un paquete que no está instalado en el entorno virtual actual.
+✅ Solución
+
+Asegúrate de haber activado el entorno virtual y luego instala el paquete faltante:
+
+```bash
+pip install streamlit
+```
+
+## 3.`Restricciones por PEP 668` y --break-system-packages
+
+En algunos sistemas, instalar paquetes con pip directamente genera advertencias o errores debido a restricciones impuestas para proteger el entorno del sistema.
+✅ Solución recomendada
+
+Usar siempre entornos virtuales para evitar estos conflictos:
+
+```bash
+python3 -m venv env_clima
+source env_clima/bin/activate
+```
+
+### ✅ Solución alternativa (no recomendada)
+
+En casos donde no se puede usar entorno virtual, puedes forzar la instalación con:
+
+
+```bash
+pip install <paquete> --break-system-packages
+```
 
 
