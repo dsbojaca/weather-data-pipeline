@@ -1,11 +1,11 @@
 import pandas as pd
 from sqlalchemy import create_engine
 from datetime import datetime
-#from src.config import DB_URL
+from src.config import DB_URL
 
 def save_to_db(data):
     
-    engine = create_engine("postgresql://admin:admin123@localhost:5432/weatherdb")
+    engine = create_engine("DB_URL")
     df= pd.DataFrame([data])
     print("Data a insertar en DB:")
     print(df)
